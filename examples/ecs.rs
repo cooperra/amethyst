@@ -41,14 +41,20 @@ impl Entities {
     }
 }
 
+use std::any::Any;
+
+type Component = (Entity, Box<Any>);
+
 #[derive(Debug)]
 struct World {
     entities: Entities,
+    pub components: Vec<Component>,
 }
 
 impl World {
     pub fn new() -> World {
         World {
+            components: Vec::new(),
             entities: Entities::new(),
         }
     }
@@ -70,6 +76,11 @@ use amethyst::{Application, Duration, State, Trans};
 
 struct Example;
 
+struct Blah {
+    x: i32,
+    y: i32,
+}
+
 impl State for Example {
     fn on_start(&mut self) {
         println!("Begin!");
@@ -77,19 +88,17 @@ impl State for Example {
 
     fn update(&mut self, _delta: Duration) -> Trans {
         let mut ents = World::new();
-        println!("{:?}", ents);
-        let blah = ents.create_entity();
-        println!("{:?}", ents);
-        let blah2 = ents.create_entity();
-        println!("{:?}", ents);
-        let blah3 = ents.create_entity();
-        println!("{:?}", ents);
-        ents.destroy_entity(blah2);
-        println!("{:?}", ents);
-        ents.destroy_entity(blah);
-        println!("{:?}", ents);
-        let blah4 = ents.create_entity();
-        println!("{:?}", ents);
+        let ent = ents.create_entity();
+        let ent2 = ents.create_entity();
+
+        ents.components.push((ent2, Box::new(Blah { x: 0, y: 0 })));
+        ents.components.push((ent, Box::new(Blah { x: 0, y: 0 })));
+        ents.components.sort_by(|x, y| {
+            x.0.cmp(&y.0)
+        });
+        let ref view = ents.components;
+
+        println!("{:#?}", ents);
         println!("Hello from Amethyst!");
         Trans::Quit
     }
