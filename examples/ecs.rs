@@ -33,9 +33,13 @@ impl Entities {
         new_entity
     }
 
+    pub fn is_alive(&self, entity: Entity) -> bool {
+        self.alive.iter().chain(&self.dead).filter(|&e| *e == entity).count() == 1
+    }
+
     pub fn destroy(&mut self, entity: Entity) {
-        if entity < self.next_id {
-            self.alive.retain(|id| *id != entity);
+        if self.is_alive(entity) {
+            self.alive.retain(|&e| e != entity);
             self.dead.push(entity);
         }
     }
@@ -48,7 +52,7 @@ type Component = (Entity, Box<Any>);
 #[derive(Debug)]
 struct World {
     entities: Entities,
-    pub components: Vec<Component>,
+    components: Vec<Component>,
 }
 
 impl World {
@@ -65,6 +69,14 @@ impl World {
 
     pub fn destroy_entity(&mut self, entity: Entity) {
         self.entities.destroy(entity);
+        self.components.retain(|e| (*e).0 != entity);
+    }
+
+    pub fn insert_component<T: Any>(&mut self, entity: Entity, comp: T) {
+        if self.entities.is_alive(entity) {
+            self.components.push((entity, Box::new(comp)));
+            self.components.sort_by(|next, prev| next.0.cmp(&prev.0));
+        }
     }
 }
 
@@ -91,15 +103,13 @@ impl State for Example {
         let ent = ents.create_entity();
         let ent2 = ents.create_entity();
 
-        ents.components.push((ent2, Box::new(Blah { x: 0, y: 0 })));
-        ents.components.push((ent, Box::new(Blah { x: 0, y: 0 })));
-        ents.components.sort_by(|x, y| {
-            x.0.cmp(&y.0)
-        });
-        let ref view = ents.components;
+        ents.insert_component(ent2, Blah { x: 0, y: 0 });
+        ents.insert_component(ent, Blah { x: 0, y: 0 });
+        ents.destroy_entity(ent2);
 
         println!("{:#?}", ents);
         println!("Hello from Amethyst!");
+
         Trans::Quit
     }
 
