@@ -1,6 +1,7 @@
 //! The game world in which entities reside.
 
-use super::entity::{Component, Entity, Entities};
+use super::component::Component;
+use super::entity::{Entity, Entities};
 
 use std::any::Any;
 
@@ -28,14 +29,14 @@ impl World {
     /// Destroys a given entity and deallocates its components.
     pub fn destroy_entity(&mut self, entity: Entity) {
         self.entities.destroy(entity);
-        self.components.retain(|e| (*e).0 != entity);
+        self.components.retain(|c| (*c).owner != entity);
     }
 
     /// Attaches a component to an entity.
     pub fn insert_component<T: Any>(&mut self, entity: Entity, comp: T) {
         if self.entities.is_alive(entity) {
-            self.components.push((entity, Box::new(comp)));
-            self.components.sort_by(|next, prev| next.0.cmp(&prev.0));
+            self.components.push(Component::new(entity, comp));
+            self.components.sort_by(|next, prev| next.owner.cmp(&prev.owner));
         }
     }
 

@@ -1,12 +1,7 @@
 //! Code for entity lifetime management.
 
-use std::any::Any;
-
 /// An unsigned 64-bit handle to an entity.
 pub type Entity = u64;
-
-/// A boxed component and the entity it belongs to.
-pub type Component = (Entity, Box<Any>);
 
 /// Manages the creation and destruction of entities.
 #[derive(Debug)]
