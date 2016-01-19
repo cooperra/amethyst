@@ -6,9 +6,10 @@ use amethyst::{Application, Duration, State, Trans, World};
 
 struct Example;
 
-struct Blah {
-    x: i32,
-    y: i32,
+struct Position {
+    x: f32,
+    y: f32,
+    z: f32,
 }
 
 impl State for Example {
@@ -17,15 +18,12 @@ impl State for Example {
     }
 
     fn update(&mut self, _delta: Duration) -> Trans {
-        let mut ents = World::new();
-        let ent = ents.create_entity();
-        let ent2 = ents.create_entity();
+        let mut world = World::new();
+        let e = world.create_entity();
 
-        ents.insert_component(ent2, Blah { x: 0, y: 0 });
-        ents.insert_component(ent, Blah { x: 0, y: 0 });
-        ents.destroy_entity(ent2);
+        world.insert_component(e, Position { x: 0.0, y: 0.0, z: 0.0 });
 
-        println!("{:#?}", ents);
+        println!("{:#?}", world);
         println!("Hello from Amethyst!");
 
         Trans::Quit
