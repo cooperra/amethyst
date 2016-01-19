@@ -23,6 +23,11 @@ impl State for Example {
         let e = world.create_entity();
 
         world.insert_component(e, Position { x: 0.0, y: 0.0, z: 0.0 });
+        world.destroy_entity(e);
+        
+        for comp in world.get_components() {
+            println!("{}", comp.owner);
+        }
 
         println!("{:#?}", world);
         println!("Hello from Amethyst!");
