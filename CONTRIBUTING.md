@@ -90,7 +90,7 @@ have done the following things first:
    * `cargo run` (if it's a binary)
 
 [ml]: https://github.com/ebkalderon/amethyst/blob/master/COPYING
-[ti]: https://github.com/ebkalderon/amethyst/blob/master/src/engine/timing.rs
+[ti]: https://github.com/ebkalderon/amethyst/blob/master/src/engine/timing.rs#L68-L112
 
 > If you want to be publicly known as an author, feel free to add your name
 > and/or GitHub username to the AUTHORS.md file in your pull request.
