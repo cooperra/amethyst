@@ -46,10 +46,10 @@
 //! }
 //! ```
 
-mod engine;
+pub mod engine;
 pub mod renderer;
 
 pub use self::engine::app::Application;
-pub use self::engine::ecs::{Component, Entity, World};
+pub use self::engine::ecs;
 pub use self::engine::state::{State, StateMachine, Trans};
 pub use self::engine::timing::{Duration, Stopwatch};

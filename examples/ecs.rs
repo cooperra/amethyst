@@ -2,7 +2,8 @@
 
 extern crate amethyst;
 
-use amethyst::{Application, Duration, State, Trans, World};
+use amethyst::{Application, Duration, State, Trans};
+use amethyst::ecs::World;
 
 struct Example;
 
