@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["DynamicState","Handle to a dynamic state object."]],"struct":[["BlendInfo",""],["DepthStencilInfo",""],["RasterizerInfo",""],["TargetBlendInfo",""],["ViewportInfo",""]]});

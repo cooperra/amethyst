@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Area","An area light."],["Directional","A directional light."],["Point","A point light."],["Spot","A spot light."]]});

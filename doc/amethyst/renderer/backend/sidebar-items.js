@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Backend","Trait implemented by renderer backends."],["Resources","Trait for managing handles to GPU resources."],["States","Trait for managing handles to GPU state objects."]]});

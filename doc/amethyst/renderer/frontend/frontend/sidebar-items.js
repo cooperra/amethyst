@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Frame","A collection of renderable elements to be drawn by the Frontend."],["Frontend","Simple renderer frontend."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["CommandEncoder","Builds new CommandBuffers."]]});

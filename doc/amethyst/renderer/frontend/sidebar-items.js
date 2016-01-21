@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["lights","Types of light sources."],["objects","Types of physical objects."]],"struct":[["Frame","A collection of renderable elements to be drawn by the Frontend."],["Frontend","Simple renderer frontend."]],"trait":[["Renderable","A trait that describes a renderable Frame element."]]});

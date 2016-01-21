@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Emitter","A particle emitter."],["Mesh","A polygon mesh."],["Sprite","A 2D sprite."]]});
